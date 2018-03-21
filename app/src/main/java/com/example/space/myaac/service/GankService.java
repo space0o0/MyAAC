@@ -1,6 +1,8 @@
 package com.example.space.myaac.service;
 
+import com.example.space.myaac.entity.BaseEntity;
 import com.example.space.myaac.entity.GankEntity;
+import com.example.space.myaac.entity.ResultBean;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -13,5 +15,5 @@ import retrofit2.http.GET;
 public interface GankService {
 
     @GET("/api/data/Android/10/1")
-    Call<GankEntity> getGank();
+    Call<BaseEntity<ResultBean>> getGank();
 }

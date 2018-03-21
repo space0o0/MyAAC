@@ -20,7 +20,9 @@ import com.example.space.myaac.R;
 import com.example.space.myaac.base.BaseRecyclerAdapter;
 import com.example.space.myaac.base.BaseRecyclerViewHolder;
 import com.example.space.myaac.constantSet.ConstantSet;
+import com.example.space.myaac.entity.BaseEntity;
 import com.example.space.myaac.entity.GankEntity;
+import com.example.space.myaac.entity.ResultBean;
 import com.example.space.myaac.service.GankService;
 import com.example.space.myaac.viewModel.MainViewModel;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     MainViewModel mainViewModel;
-    BaseRecyclerAdapter<GankEntity.ResultsBean> adapter;
+    BaseRecyclerAdapter<ResultBean> adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void subscribeUI(MainViewModel viewModel) {
-        viewModel.getGanks().observe(this, new Observer<GankEntity>() {
+        viewModel.getGanks().observe(this, new Observer<BaseEntity<ResultBean>>() {
             @Override
-            public void onChanged(@Nullable GankEntity gankEntity) {
+            public void onChanged(@Nullable BaseEntity<ResultBean> gankEntity) {
 
                 if (adapter == null) {
                     initAdapter(gankEntity.getResults());
@@ -60,23 +62,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initAdapter(List<GankEntity.ResultsBean> list) {
+    private void initAdapter(List<ResultBean> list) {
 
-        adapter = new BaseRecyclerAdapter<GankEntity.ResultsBean>(this, list) {
+        adapter = new BaseRecyclerAdapter<ResultBean>(this, list) {
             @Override
             public int getItemLayoutID(int viewType) {
                 return R.layout.item_main;
             }
 
             @Override
-            public void bindData(BaseRecyclerViewHolder holder, int position, GankEntity.ResultsBean item) {
+            public void bindData(BaseRecyclerViewHolder holder, int position, ResultBean item) {
                 holder.getTextView(R.id.desc).setText(item.getDesc());
                 holder.getTextView(R.id.url).setText(item.getUrl());
                 holder.getTextView(R.id.id).setText(item.get_id());
             }
         };
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         recyclerView.setAdapter(adapter);
 

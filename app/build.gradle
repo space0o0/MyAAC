@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -21,17 +22,16 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 1.7
+        sourceCompatibility 1.7
     }
-    dataBinding {
-        enabled = true
-    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -61,7 +61,7 @@ dependencies {
     testImplementation "android.arch.persistence.room:testing:1.0.0"
 
     // Java8 support for Lifecycles
-    implementation "android.arch.lifecycle:common-java8:1.1.0"
+//    implementation "android.arch.lifecycle:common-java8:1.1.0"
 
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.4.0'
